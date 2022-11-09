@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1668025627 source:g:\codeblocks\teste\pim4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"tipos.h"
+
+1666920527 g:\codeblocks\teste\pim4\tipos.h
+
