@@ -46,13 +46,9 @@ int salva_usuarios() {
 }
 
 int calc_idade(n) {
-//    struct tm *hoje;
-//    time_t segundos;
     t_data dn,dd;
     int id;
 
-//    time(&segundos);
-//    hoje = localtime(&segundos);
     dn = pacientes[n].dt_nasc;
     dd = pacientes[n].dt_diag;
     id = atoi(dd.ano) - atoi(dn.ano);
@@ -219,7 +215,7 @@ void mostra_dados () {
     int i,n;
 
     if (n_pacientes == 0) {
-        printf("Não ha pacientes para mostrar\n");
+        printf("Nao ha pacientes para mostrar\n");
         return;
     }
     printf("Escolha: T para todos ou digite o numero de um paciente (0 - %d):\n",n_pacientes-1);
@@ -244,7 +240,7 @@ void mostra_dados () {
         printf ("Data Diagnostico: %s/%s/%s\n", pacientes[i].dt_diag.dia,
                                                 pacientes[i].dt_diag.mes,
                                                 pacientes[i].dt_diag.ano);
-        printf ("Idade: %d\n",calc_idade(i));
+        printf ("Idade (na data do dignostico): %d\n",calc_idade(i));
         printf ("Email: %s\n", pacientes[i].email);
         printf ("Rua: %s\n", pacientes[i].endereco.rua);
         printf ("Numero: %s\n", pacientes[i].endereco.num);
@@ -260,15 +256,15 @@ void mostra_dados () {
 
 char *menu() {
     printf("\n\nMenu\n\n");
+    printf("(0) Fim\n\n");
     printf("(1) Adiciona um paciente\n");
     printf("(2) Apaga um paciente\n");
     printf("(3) Edita os dados de um paciente\n");
     printf("(4) Mostra dados dos pacientes\n");
     printf("(5) Gera arquivo com os dados para a Secretaria de Saude\n");
     printf("(6) Adiciona um usuario\n");
-    printf("(10) Fim\n\n");
     printf("Escolha: ");
-    gets(linha);
+    le_linha();
     return(linha);
 }
 
@@ -301,8 +297,7 @@ int valida_login() {
 }
 
 
-int main()
-{
+int main() {
     int i;
 
     if (valida_login() < 0) {
@@ -312,9 +307,13 @@ int main()
 
     le_pacientes();
 
-    while (i = atoi(menu())) {
-        if (i == 10)
+    while (1) {
+        i = atoi(menu());
+        printf("Comando escolhido: %d\n",i);
+        if (i == 0) {
+            printf("Terminando...\n");
             break;
+        }
         switch (i) {
             case 1: novo_paciente(); break;
             case 2: apaga_um_paciente(); break;
@@ -322,6 +321,7 @@ int main()
             case 4: mostra_dados(); break;
             case 5: gera_relatorio(); break;
             case 6: adiciona_usuario(); break;
+            default: printf("Digite um comando valido.\n"); break;
         }
     }
     salva_pacientes();
