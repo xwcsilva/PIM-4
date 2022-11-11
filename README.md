@@ -2,7 +2,7 @@
 
 Código fonte e arquivos acessórios para execução do projeto para o PIM-4 do curso Análise e Desenvovimento de Sistemas do 2º Semestre de 2022 da UNIP.
 
-# Requisitos para compilação e execuçao:
+# Requisitos para compilação e execução:
 - Instalar o Codeblocks: https://www.codeblocks.org/downloads/
 - Instalar o GCC: https://gcc.gnu.org/install/binaries.html
 - Abrir o Codeblocks e carregar o projeto, em seguida executar o programa via F9.
