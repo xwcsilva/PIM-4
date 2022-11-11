@@ -124,22 +124,14 @@ void le_linha() {
 void obtem_dados_paciente(n) {
     printf ("Nome : ");
     le_linha(); strcpy(pacientes[n].nome,linha);
-    printf ("Telefone : ");
+    printf ("Telefone (somente numeros) : ");
     le_linha(); strcpy(pacientes[n].telefone,linha);
     printf ("CPF (somente numeros) : ");
     le_linha(); strcpy(pacientes[n].cpf,linha);
-    printf ("Dia do nascimento : ");
-    le_linha(); strcpy(pacientes[n].dt_nasc.dia,linha);
-    printf ("Mes do nascimento : ");
-    le_linha(); strcpy(pacientes[n].dt_nasc.mes,linha);
-    printf ("Ano do nascimento : ");
-    le_linha(); strcpy(pacientes[n].dt_nasc.ano,linha);
-    printf ("Dia do diagnostico : ");
-    le_linha(); strcpy(pacientes[n].dt_diag.dia,linha);
-    printf ("Mes do diagnostico : ");
-    le_linha(); strcpy(pacientes[n].dt_diag.mes,linha);
-    printf ("Ano do diagnostico : ");
-    le_linha(); strcpy(pacientes[n].dt_diag.ano,linha);
+    printf ("Data de nascimento (DD MM AAAA) : ");
+    le_linha(); sscanf(linha,"%s %s %s", &pacientes[n].dt_nasc.dia, &pacientes[n].dt_nasc.mes, &pacientes[n].dt_nasc.ano);
+    printf ("Data do diagnostico : ");
+    le_linha(); sscanf(linha,"%s %s %s", &pacientes[n].dt_diag.dia, &pacientes[n].dt_diag.mes, &pacientes[n].dt_diag.ano);
     printf ("Email : ");
     le_linha(); strcpy(pacientes[n].email,linha);
     printf ("Rua : ");
@@ -218,7 +210,7 @@ void apaga_um_paciente () {
     do {
         memcpy(&pacientes[i],&pacientes[i+1],sizeof(t_paciente));
         i++;
-    } while (i < n_pacientes);
+    } while (i < n_pacientes - 1);
     n_pacientes--;
     pacientes = realloc(pacientes,sizeof(t_paciente) * (n_pacientes));
 }
