@@ -95,18 +95,19 @@ int le_pacientes () {
 
 int gera_relatorio () {
     int i,j,idade;
+    char *n_relat = "relatorio.txt";
 
-    arq_relatorio = fopen("relatorio.txt","w");
+    arq_relatorio = fopen(n_relat,"w");
     if (arq_relatorio == NULL)
         return (-1);
     for (i = 0; i < n_pacientes; i++)
-        if (strlen(pacientes[i].comorbidades) > 0) {
-            idade = calc_idade(i);
-            if (idade > 65)
-                fprintf(arq_relatorio,"CEP: %s, idade: %d\n",pacientes[i].endereco.cep, idade);
-        }
+        //if (strlen(pacientes[i].comorbidades) > 0) {
+        idade = calc_idade(i);
+        if (idade > 65)
+            fprintf(arq_relatorio,"CEP: %s, idade: %d\n",pacientes[i].endereco.cep, idade);
+        //}
     j = fclose(arq_relatorio);
-    printf("Gerado o relatorio.\n");
+    printf("Gerado o relatorio no arquivo %s.\n",n_relat);
     return (j);
 }
 
@@ -226,7 +227,7 @@ void mostra_dados () {
     int i,n;
 
     if (n_pacientes == 0) {
-        printf("Não há pacientes para mostrar\n");
+        printf("N�o ha pacientes para mostrar\n");
         return;
     }
     printf("Escolha: T para todos ou digite o numero de um paciente (0 - %d):\n",n_pacientes-1);
@@ -240,7 +241,7 @@ void mostra_dados () {
             return;
         i = n;
     }
-    for ( ;i < n; i++) {
+    do {
         printf ("Paciente %d\n",i);
         printf ("\nNome: %s\n", pacientes[i].nome);
         printf ("Telefone: %s\n", pacientes[i].telefone);
@@ -261,7 +262,8 @@ void mostra_dados () {
         printf ("CEP: %s\n", pacientes[i].endereco.cep);
         printf ("Comorbidades: %s ",pacientes[i].comorbidades);
         printf ("\n\n");
-    };
+        i++;
+    } while (i < n);
 }
 
 char *menu() {
@@ -281,9 +283,9 @@ char *menu() {
 void adiciona_usuario () {
     n_usuarios++;
     usuarios = realloc(usuarios,sizeof(t_usuario) * (n_usuarios));
-    printf("Nome do usuário:\n");
+    printf("Nome do usu�rio:\n");
     le_linha(); strcpy(usuarios[n_usuarios-1].nome,linha);
-    printf("Senha do usuário:\n");
+    printf("Senha do usu�rio:\n");
     le_linha(); strcpy(usuarios[n_usuarios-1].senha,linha);
 }
 
@@ -291,13 +293,13 @@ int valida_login() {
     char nome[21],senha[21];
     int i;
 
-    if (le_usuarios() == -1) { // Não existem usuarios cadastrados no sistema
+    if (le_usuarios() == -1) { // N�o existem usuarios cadastrados no sistema
         printf("Nao ha usuarios no sistema, vamos criar um:\n");
         adiciona_usuario();
     } else {
-        printf("Nnome do usuário do sistema:\n");
+        printf("Nome do usuario do sistema:\n");
         le_linha(); strcpy(nome,linha);
-        printf("Senha do usuário do sistema:\n");
+        printf("Senha do usuario do sistema:\n");
         le_linha(); strcpy(senha,linha);
         for (i = 0; i < n_usuarios; i++)
             if(strcmp(nome,usuarios[i].nome) == 0 && strcmp(senha,usuarios[i].senha) == 0)
