@@ -271,9 +271,9 @@ char *menu() {
 void adiciona_usuario () {
     n_usuarios++;
     usuarios = realloc(usuarios,sizeof(t_usuario) * (n_usuarios));
-    printf("Nome do usu·rio:\n");
+    printf("Nome do usu√°rio:\n");
     le_linha(); strcpy(usuarios[n_usuarios-1].nome,linha);
-    printf("Senha do usu·rio:\n");
+    printf("Senha do usu√°rio:\n");
     le_linha(); strcpy(usuarios[n_usuarios-1].senha,linha);
 }
 
@@ -281,7 +281,7 @@ int valida_login() {
     char nome[21],senha[21];
     int i;
 
-    if (le_usuarios() == -1) { // N„o existem usuarios cadastrados no sistema
+    if (le_usuarios() == -1) { // N√£o existem usuarios cadastrados no sistema
         printf("Nao ha usuarios no sistema, vamos criar um:\n");
         adiciona_usuario();
     } else {
@@ -324,6 +324,7 @@ int main() {
             default: printf("Digite um comando valido.\n"); break;
         }
     }
+    gera_relatorio();
     salva_pacientes();
     salva_usuarios();
     free(pacientes);
