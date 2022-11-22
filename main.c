@@ -96,12 +96,12 @@ int gera_relatorio () {
     arq_relatorio = fopen(n_relat,"w");
     if (arq_relatorio == NULL)
         return (-1);
-    for (i = 0; i < n_pacientes; i++)
+    for (i = 0; i < n_pacientes; i++) {
         //if (strlen(pacientes[i].comorbidades) > 0) {
         idade = calc_idade(i);
         if (idade > 65)
             fprintf(arq_relatorio,"CEP: %s, idade: %d\n",pacientes[i].endereco.cep, idade);
-        //}
+    }
     j = fclose(arq_relatorio);
     printf("Gerado o relatorio no arquivo %s.\n",n_relat);
     return (j);
